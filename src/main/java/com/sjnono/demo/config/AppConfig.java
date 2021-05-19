@@ -21,13 +21,4 @@ public class AppConfig {
         return new JPAQueryFactory(entityManager);
     }
 
-
-    @Bean
-    public ModelMapper modelMapper(){
-        ModelMapper modelMapper = new ModelMapper();
-
-        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-        return modelMapper;
-    }
-
 }
