@@ -14,8 +14,6 @@ public class StockRestController {
     @Autowired
     StockService stockService;
 
-    @Autowired
-    ModelMapper modelMapper;
 
 //    @GetMapping("/{id}")
 //    public ResponseEntity getStockDetail(@PathVariable String standardCode}{

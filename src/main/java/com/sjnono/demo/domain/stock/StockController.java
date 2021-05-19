@@ -12,8 +12,6 @@ public class StockController {
     @Autowired
     StockService stockService;
 
-    @Autowired
-    ModelMapper modelMapper;
 
 
 
