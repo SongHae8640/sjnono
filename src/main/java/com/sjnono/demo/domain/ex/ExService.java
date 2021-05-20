@@ -15,6 +15,6 @@ public class ExService {
 
     public Example findById(Long exId) {
 
-        return exRepository.findById(exId).get();
+        return exRepository.findByIdJoinStock(exId);
     }
 }

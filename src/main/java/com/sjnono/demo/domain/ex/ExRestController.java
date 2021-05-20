@@ -35,7 +35,7 @@ public class ExRestController {
         Example example = this.exService.findById(exId);
 
 
-        EntityModel<Example> model = EntityModel.of(example).add(linkTo(this.getClass()).withSelfRel());
+        EntityModel<Example> model = EntityModel.of(example).add(linkTo(this.getClass()).slash(example.id).withSelfRel());
 
 
         return ResponseEntity.ok(model);
