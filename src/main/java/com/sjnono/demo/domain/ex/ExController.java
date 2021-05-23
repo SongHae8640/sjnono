@@ -12,7 +12,7 @@ public class ExController {
     @GetMapping
     public String goExPage(){
 
-        return "/ex/example";
+        return "domain/ex/example";
     }
 
 

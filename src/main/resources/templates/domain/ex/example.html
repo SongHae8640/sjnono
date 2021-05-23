@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>example</title>
+
+
+    <th:block th:replace="fragments/bootstrap5"></th:block>
+    <th:block th:replace="fragments/head"></th:block>
+
+
+</head>
+<body>
+<th:block th:replace="fragments/header"></th:block>
+
+<main>
+    <div class="container py-5">
+        <h1> example page </h1>
+
+
+        <div class="p-5 mb-4 bg-light rounded-3" id="single-ex">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold response-ex-id">id</h1>
+                <p class="col-md-8 fs-4 response-stock-content">stock content</p>
+                <div class="row">
+                    <div class="col-md-7">
+                        <form>
+                            <div class="col-sm-3">
+                                <label class="form-label">example id</label>
+                                <input type="text" class="form-control request-ex-id" id="search-ex-btn" placeholder="" value="" required>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label class="form-label">Search</label>
+                                <button class="btn btn-primary btn-lg search-btn" type="button">단건 검색</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+<th:block th:replace ="fragments/footer"></th:block>
+<script type="module" src="ex/js/ex.js"></script>
+</body>
+</html>
