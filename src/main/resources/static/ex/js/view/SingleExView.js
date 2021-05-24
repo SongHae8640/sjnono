@@ -32,5 +32,12 @@ SingleExView.onClickSearchBtn = function () {
     this.emit('@search', {input: this.exId.value})
 
 }
+
+SingleExView.render = function (jsonData = {}){
+    console.log(tag, 'render(jsonData)', jsonData)
+    this.responseExId.innerText = jsonData.stock.standardCode
+    this.responseStockContent.innerText = jsonData.stock.koreanStockName
+
+}
 export default SingleExView
 

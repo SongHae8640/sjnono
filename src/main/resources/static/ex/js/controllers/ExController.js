@@ -16,17 +16,27 @@ export default {
 
     onSearch(exId){
         console.log(tag, 'onSearch(exId)', exId)
-        ExModel.search(exId).then( data =>{
-            console.log(data)
-            //this.onSearchSuccess(data)
-        }).catch(function (err){
-            console.log(err)
-            //this.onSearchFail(err)
+        ExModel.search(exId)
+        .then( promiseResponse =>{
+            console.log(tag, 'onSearch() promiseResponse',promiseResponse)
+
+            if(promiseResponse.status === 200){
+                return promiseResponse.json()
+            }else{
+
+            }
+
+        }).then(jsonData =>{
+            this.onSearchSuccess(jsonData)
+        }).catch(err => {
+            console.log(tag, 'onSearch() err', err)
         })
     },
 
-    onSearchSuccess(data){
-      console.log(tag, 'onSearchSuccess(data)', data)
+    onSearchSuccess(jsonData){
+        console.log(tag, 'onSearchSuccess(jsonData)', jsonData)
+        SingleExView.render(jsonData)
+
 
     },
     onSearchFail(err){
