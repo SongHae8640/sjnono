@@ -1,9 +1,9 @@
 const tag = '[ExModel]'
 
 export default {
-    search(exId){
+    getExById(exId){
         console.log(tag, 'search(exId)', exId)
-        return fetch('/ex/'+exId,{
+        return fetch('/api/ex/'+exId,{
             method : 'GET',
         })
         // .then(response => {
@@ -18,7 +18,11 @@ export default {
         //     console.log(tag, 'search() err', err)
         //     return err
         // })
-    }
-    ,
+    },
+    getExList(page){
+      return fetch('/ex?page='+page,{
+          method : 'GET',
+      })
+    },
 
 }

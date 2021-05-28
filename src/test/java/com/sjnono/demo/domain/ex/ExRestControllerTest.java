@@ -28,13 +28,21 @@ class ExRestControllerTest {
 
     @Test
     void showDetailExample() throws Exception{
-        ResultActions actions = mockMvc.perform(get("/ex/1"));
+        ResultActions actions = mockMvc.perform(get("/api/ex/1"));
 
         actions.andDo(print())
             .andExpect(status().isOk())
             .andExpect(jsonPath("id").value(1))
         ;
 
+    }
+
+    @Test
+    void getExampleList() throws Exception{
+        ResultActions actions = mockMvc.perform(get("/api/ex?page=0"));
+
+        actions.andDo(print())
+                ;
     }
 
 

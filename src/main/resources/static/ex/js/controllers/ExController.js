@@ -1,4 +1,5 @@
 import SingleExView from "../view/SingleExView.js"
+import MultiExView from "../view/MultiExView.js"
 
 import ExModel from "../model/ExModel.js"
 
@@ -11,12 +12,16 @@ export default {
         SingleExView.setup(document.querySelector('#single-ex'))
             .on('@search' , e => this.onSearch(e.detail.input))
 
+        MultiExView.setup(document.querySelector('#multi-ex'))
+
+        this.getExList()
+
 
     },
 
     onSearch(exId){
         console.log(tag, 'onSearch(exId)', exId)
-        ExModel.search(exId)
+        ExModel.getExById(exId)
         .then( promiseResponse =>{
             console.log(tag, 'onSearch() promiseResponse',promiseResponse)
 
@@ -41,6 +46,11 @@ export default {
     },
     onSearchFail(err){
         console.log(tag, 'onSearchFail(err)', err)
+    },
+
+    getExList(page = 1){
+        console.log(tag, 'getExList()')
+        ExModel.getExList(page)
     }
 
 }
