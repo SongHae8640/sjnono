@@ -44,24 +44,29 @@
 
         <div class="p-5 mb-4 bg-light rounded-3" id="multi-ex">
             <div class="container-fluid py-5">
-                <table class="table">
+                <table class="table" id="multi-ex-table">
                     <thead>
                         <tr>
                             <th scope="col">id</th>
                             <th scope="col">stock korea name</th>
                         </tr>
                     </thead>
+                    <tbody>
+                    </tbody>
+                    <tr class="multi-ex-table-row multi-ex-table-row-template" style="display: none">
+                        <td class="multi-ex-table-row-id" >id</td>
+                        <td class="multi-ex-table-row-stock-name">stockName</td>
+                    </tr>
                 </table>
+                <nav aria-label="Page navigation" id="multi-ex-page-nav">
+                    <ul class="pagination">
+                    </ul>
+                    <li class="page-item page-item-template prevPage" style="display: none"><a class="page-link">Previous</a></li>
+                    <li class="page-item page-item-template numPage" style="display: none"><a class="page-link">0</a></li>
+                    <li class="page-item page-item-template nextPage" style="display: none"><a class="page-link">Next</a></li>
+                </nav>
             </div>
 
-            <div id="multi-ex-template">
-                <div id="multi-ex-tbody-template">
-                    <tr>
-                        <th scope="row"></th>
-                        <th></th>
-                    </tr>
-                </div>
-            </div>
         </div>
     </div>
 </main>

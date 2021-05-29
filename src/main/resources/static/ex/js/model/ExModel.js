@@ -20,7 +20,7 @@ export default {
         // })
     },
     getExList(page){
-      return fetch('/ex?page='+page,{
+      return fetch('/api/ex?page='+page,{
           method : 'GET',
       })
     },

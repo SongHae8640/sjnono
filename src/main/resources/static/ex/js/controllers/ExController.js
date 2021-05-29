@@ -13,6 +13,7 @@ export default {
             .on('@search' , e => this.onSearch(e.detail.input))
 
         MultiExView.setup(document.querySelector('#multi-ex'))
+            .on('@clickPage', e=> this.getExList(e.detail.page))
 
         this.getExList()
 
@@ -48,9 +49,23 @@ export default {
         console.log(tag, 'onSearchFail(err)', err)
     },
 
-    getExList(page = 1){
+    getExList(page = 0){
         console.log(tag, 'getExList()')
         ExModel.getExList(page)
-    }
+        .then( promiseResponse =>{
+            console.log(tag, 'getExList() promiseResponse',promiseResponse)
+
+            if(promiseResponse.status === 200){
+                return promiseResponse.json()
+            }else{
+
+            }
+
+        }).then(jsonData =>{
+            MultiExView.render(jsonData)
+        }).catch(err => {
+            console.log(tag, 'getExList() err', err)
+        })
+    },
 
 }

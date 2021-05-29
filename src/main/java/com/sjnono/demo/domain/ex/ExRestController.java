@@ -49,9 +49,21 @@ public class ExRestController {
 
         Page<Example> search = this.exService.search(pageable);
 
+
         EntityModel<Page<Example>> model = EntityModel.of(search).add(linkTo(this.getClass()).withSelfRel());
 
         return ResponseEntity.ok(model);
+    }
+
+    @PostMapping
+    public ResponseEntity saveExample(@RequestBody Example example){
+
+        this.exValidator.saveValidate(example);
+
+
+
+
+        return null;
     }
 
 
