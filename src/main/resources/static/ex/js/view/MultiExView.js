@@ -1,4 +1,4 @@
-import View from './View.js'
+import View from '../../../common/js/View.js'
 
 const tag = '[MultiExView]'
 
@@ -75,7 +75,7 @@ MultiExView.onClickPage = function (e){
 
 
 MultiExView.addExRow = function (element) {
-    console.log(tag,'addExRow(element)', element)
+    //console.log(tag,'addExRow(element)', element)
     var tempAddExRow = this.multiExTableRowTemplate.cloneNode(true)
     tempAddExRow.classList.remove('multi-ex-table-row-template')
     tempAddExRow.style.display = ''

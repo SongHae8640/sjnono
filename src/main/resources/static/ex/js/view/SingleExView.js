@@ -1,4 +1,4 @@
-import View from './View.js'
+import View from '../../../common/js/View.js'
 
 const tag = '[SingleExView]'
 
