@@ -60,10 +60,13 @@ public class ExRestController {
 
         this.exValidator.saveValidate(example);
 
+        Example newEx = this.exService.insertEx(example);
 
 
+        EntityModel<Example> model = EntityModel.of(newEx).add(linkTo(this.getClass()).slash(newEx.id).withSelfRel());
 
-        return null;
+
+        return ResponseEntity.ok(model);
     }
 
 

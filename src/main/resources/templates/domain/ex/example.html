@@ -70,6 +70,25 @@
             </div>
 
         </div>
+
+        <div class="p-5 mb-4 bg-light rounded-3" id="insert-ex">
+            <h1>입력</h1>
+            <div class="container-fluid py-5">
+                <form id="insert-ex-form">
+                    <div class="mb-3">
+                        <label class="form-label">주식표준코드</label>
+                        <input class="form-control" id="standard-Code">
+                        <div class="form-text">krx에 있는 주식 표준코드를 입력하시오</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">단기 순이익</label>
+                        <input class="form-control" id="net-incm">
+                    </div>
+                    <button class="btn btn-primary">Submit</button>
+                </form>
+
+            </div>
+        </div>
     </div>
 </main>
 <th:block th:replace ="fragments/footer"></th:block>

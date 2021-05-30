@@ -22,4 +22,9 @@ public class ExService {
         return exRepository.search(pageable);
 
     }
+
+    public Example insertEx(Example example) {
+
+        return exRepository.save(example);
+    }
 }

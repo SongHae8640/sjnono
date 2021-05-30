@@ -22,9 +22,7 @@ public class ExValidator {
     }
 
     public void saveValidate(Example example) {
-        if(example.id < 1){
 
-        }
 
 
     }
