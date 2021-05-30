@@ -5,23 +5,21 @@ export default {
         console.log(tag, 'search(exId)', exId)
         return fetch('/api/ex/'+exId,{
             method : 'GET',
+        }).then(response =>
+            response.json().then(data => ({ status : response.status, data : data}))
+        ).catch(err => {
+            response.json().then(data => ({ data : data}))
         })
-        // .then(response => {
-        //     console.log(tag, 'search() Promise response', response)
-        //     return response.json()
-        // })
-        // .then(jsonData =>{
-        //     console.log(tag, 'search() jsonData', jsonData)
-        //     return jsonData
-        // })
-        // .catch(err =>{
-        //     console.log(tag, 'search() err', err)
-        //     return err
-        // })
     },
+
+
     getExList(page){
       return fetch('/api/ex?page='+page,{
           method : 'GET',
+      }).then(response =>
+          response.json().then(data => ({ status : response.status, data : data}))
+      ).catch(err => {
+          response.json().then(data => ({ data : data}))
       })
     },
 
@@ -33,6 +31,10 @@ export default {
                 'Content-Type' : 'application/json'
             },
             body : JSON.stringify(exJson)
+        }).then(response =>
+            response.json().then(data => ({ status : response.status, data : data}))
+        ).catch(err => {
+            response.json().then(data => ({ data : data}))
         })
     },
 

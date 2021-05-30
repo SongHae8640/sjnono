@@ -23,76 +23,72 @@ export default {
 
 
     },
-    insertEx(standardCode){
-        console.log(tag, 'insertEx(standardCode)', standardCode)
-        ExModel.insertEx(standardCode)
-        .then( promiseResponse =>{
-                console.log(tag, 'insertEx() promiseResponse',promiseResponse)
 
-                if(promiseResponse.status === 200){
-                    return promiseResponse.json()
-                }else{
 
-                }
-
-            }).then(jsonData =>{
-            this.onInsertExSuccess(jsonData)
-        }).catch(err => {
-            console.log(tag, 'onSearch() err', err)
-        })
-    },
-    onInsertExSuccess(jsonData){
-        this.onSearchSuccess(jsonData)
-    }
-
-    ,
 
     onSearch(exId){
         console.log(tag, 'onSearch(exId)', exId)
         ExModel.getExById(exId)
-        .then( promiseResponse =>{
-            console.log(tag, 'onSearch() promiseResponse',promiseResponse)
+        .then( response  =>{
+            console.log(tag, 'onSearch() response',response)
 
-            if(promiseResponse.status === 200){
-                return promiseResponse.json()
-            }else{
-
+            if(response.status === 200){    // OK
+                this.onSearchSuccess(response.data)
+            }else if(response.status === 204){  //No Content
+                this.onSearchFailNoContent(response.data)
+            }else{  //서버와의 연결이 안될 때(응답상태코드 X)
+                this.connectionError(response.data)
             }
 
-        }).then(jsonData =>{
-            this.onSearchSuccess(jsonData)
-        }).catch(err => {
-            console.log(tag, 'onSearch() err', err)
         })
-    },
-
-    onSearchSuccess(jsonData){
-        console.log(tag, 'onSearchSuccess(jsonData)', jsonData)
-        SingleExView.render(jsonData)
-
-
-    },
-    onSearchFail(err){
-        console.log(tag, 'onSearchFail(err)', err)
     },
 
     getExList(page = 0){
         console.log(tag, 'getExList()')
         ExModel.getExList(page)
-        .then( promiseResponse =>{
-            console.log(tag, 'getExList() promiseResponse',promiseResponse)
+        .then( response =>{
+            console.log(tag, 'getExList() response',response)
 
-            if(promiseResponse.status === 200){
-                return promiseResponse.json()
+            if(response.status === 200){
+                MultiExView.render(response.data)
             }else{
-
+                this.connectionError(response.data)
             }
 
-        }).then(jsonData =>{
-            MultiExView.render(jsonData)
-        }).catch(err => {
-            console.log(tag, 'getExList() err', err)
         })
+    },
+
+    insertEx(standardCode){
+        console.log(tag, 'insertEx(standardCode)', standardCode)
+        ExModel.insertEx(standardCode)
+            .then( response =>{
+                console.log(tag, 'insertEx() response',response)
+
+                if(response.status === 200){
+                    this.onInsertExSuccess(response.data)
+                }else{
+                    this.connectionError(response.data)
+                }
+            })
+    },
+
+
+
+    onSearchFailNoContent(err){
+        console.log(tag, 'onSearchFailNoContent(err)', err)
+    },
+
+    connectionError(error){
+        console.log(tag,'connectionError(error)', error)
+    },
+
+    onSearchSuccess(exData){
+        console.log(tag, 'onSearchSuccess(jsonData)', exData)
+        SingleExView.render(exData)
+    },
+
+    onInsertExSuccess(jsonData){
+        this.onSearchSuccess(jsonData)
     },
 
 }
