@@ -2,6 +2,7 @@ package com.sjnono.demo.domain.ex;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sjnono.demo.domain.stock.Stock;
+import com.sjnono.demo.global.error.ErrorEnum;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.web.servlet.function.RequestPredicates;
 
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
@@ -32,25 +34,45 @@ class ExRestControllerTest {
     ObjectMapper objectMapper;
 
     @Test
-    void showDetailExample() throws Exception{
+    void 예제_단일건수조회_성공() throws Exception {
         ResultActions actions = mockMvc.perform(get("/api/ex/1"));
 
         actions.andDo(print())
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("id").value(1))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("standardCode").exists())
+                .andExpect(jsonPath("koreanStockName").exists())
+                .andExpect(jsonPath("_links.self").exists())
         ;
 
     }
 
     @Test
-    void getExampleList() throws Exception{
+    public void 예제_단일건수조회_NotFound() throws Exception {
+        // GIVEN
+        String url = "/api/ex/100";
+
+        // WHEN
+        ResultActions actions = mockMvc.perform(get(url));
+
+        // THEN
+        actions.andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("httpStatus").value(is(ErrorEnum.NOT_FOUND.toString())))
+                .andExpect(jsonPath("message").exists())
+                .andExpect(jsonPath("_links.self").exists())
+        ;
+    }
+
+    // TODO 하위 테스트 필요
+    @Test
+    void getExampleList() throws Exception {
         ResultActions actions = mockMvc.perform(get("/api/ex?page=0"));
 
         actions.andDo(print())
-                ;
+        ;
     }
 
-
+    /*
     @Test
     void insertExample() throws Exception{
         Example example = Example.builder()
@@ -68,6 +90,7 @@ class ExRestControllerTest {
         ;
 
     }
+     */
 
 
 }

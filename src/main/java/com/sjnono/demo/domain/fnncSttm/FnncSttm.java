@@ -7,16 +7,13 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "fnnc_sttm")
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class FnncSttm {
 
-    @Id
-    Integer id;
-
+    @Id @GeneratedValue
+    Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "STND_CODE")

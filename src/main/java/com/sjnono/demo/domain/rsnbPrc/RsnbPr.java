@@ -9,14 +9,12 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "rsnb_pr")
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class RsnbPr {
 
-    @Id
+    @Id @GeneratedValue
     Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

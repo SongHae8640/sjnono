@@ -1,8 +1,6 @@
-package com.sjnono.demo.config;
+package com.sjnono.demo.global.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Configuration
-public class AppConfig {
+public class JpaConfig {
 
     @PersistenceContext
     private EntityManager entityManager;

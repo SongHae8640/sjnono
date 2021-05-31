@@ -7,15 +7,13 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "stck_prc")
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class StckPrc {
 
-    @Id
-    Integer id;
+    @Id @GeneratedValue
+    Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "STND_CODE")

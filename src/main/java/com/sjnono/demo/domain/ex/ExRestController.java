@@ -1,5 +1,7 @@
 package com.sjnono.demo.domain.ex;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,27 +24,25 @@ public class ExRestController {
     private final ExService exService;
     private final ExValidator exValidator;
 
-//    @GetMapping
-//    public ResponseEntity getExamples(){
-//
-//        return null;
-//    }
-
-
     @GetMapping("/{exId}")
-    public ResponseEntity getExampleOne(@PathVariable Long exId){
-        this.exValidator.getOneValidate(exId);
+    public ResponseEntity getExampleOne(@PathVariable Long exId) {
+        exValidator.getOneValidate(exId);
 
-        Example example = this.exService.findById(exId);
+        Example example = exService.findById(exId);
 
+        ExampleDto exampleDto = new ExampleDto(example.getStock().getStandardCode(), example.getStock().getKoreanStockName());
 
-        EntityModel<Example> model = EntityModel.of(example).add(linkTo(this.getClass()).slash(example.id).withSelfRel());
-
-
+        EntityModel<ExampleDto> model = EntityModel.of(exampleDto).add(linkTo(methodOn(ExRestController.class).getExampleOne(exId)).withSelfRel());
         return ResponseEntity.ok(model);
     }
 
+    @Data @AllArgsConstructor
+    static class ExampleDto {
+        private String standardCode;
+        private String koreanStockName;
+    }
 
+    // TODO 아래부터 리팩터링 필요
     @GetMapping
     public ResponseEntity getExampleList(@PageableDefault(sort = "id", direction = Sort.Direction.ASC, size = 3)Pageable pageable){
         this.exValidator.getListValidate(pageable);
