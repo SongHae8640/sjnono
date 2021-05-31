@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class FnncSttm {
 
     @Id
-    Integer id;
+    Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -28,5 +28,19 @@ public class FnncSttm {
     @Column(name = "BASE_QRTR")
     String baseQuarter;
 
+    String invn;    //재고자산
 
+    String othrCrntFnncAsts;  //기타유동금융자산
+
+    String crntTaxAsts;   //당기법인세자산
+
+    String othrCrntAsts;   //기타유동자산
+
+    String crntAsts;   //유동자산
+
+
+    // 유동자산 = 재고자산 + 기타유동금융자산 + 당기법인세자산 + 기타유동자산
+    public void calCrntAsts() {
+        this.crntAsts = invn + othrCrntFnncAsts + crntTaxAsts + othrCrntAsts;
+    }
 }
