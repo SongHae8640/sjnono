@@ -12,9 +12,9 @@ import javax.persistence.*;
 public class RsnbPrcClclMthd {
 
     @Id @GeneratedValue
-    Long id;
+    private Long id;
 
     @Column(name = "MTHD_NAME")
-    String methodName;
+    private String methodName;
 
 }

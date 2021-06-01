@@ -2,10 +2,7 @@ package com.sjnono.demo.domain.stock;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "stock")
@@ -13,41 +10,41 @@ import javax.persistence.Table;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Stock {
 
-    @Id
-    @Column(name = "STND_CODE")
-    String standardCode;
+    @Id @Column(name = "STND_CODE")
+    private String standardCode;
 
     @Column(name = "SHRT_CODE")
-    String shortCode;
+    private String shortCode;
 
     @Column(name = "KRN_STCK_NAME")
-    String koreanStockName;
+    private String koreanStockName;
 
     @Column(name = "KRN_STCK_SHRT_NAME")
-    String koreanStockShortName;
+    private String koreanStockShortName;
 
     @Column(name = "ENGL_STCK_NAME")
-    String englishStockName;
+    private String englishStockName;
 
     @Column(name = "LSTN_DATE")
-    String listingDate;
+    private String listingDate;
 
     @Column(name = "MRKT_CLSF")
-    String marketClassification;
+    private String marketClassification;
 
     @Column(name = "SCRT_CLSF")
-    String securitiesClassification;
+    private String securitiesClassification;
 
     @Column(name = "DPRT")
-    String department;
+    private String department;
 
     @Column(name = "STCK_TYPE")
-    String stockType;
+    @Enumerated(EnumType.STRING)
+    private StockType stockType;
 
     @Column(name = "FACE_VL")
-    String faceValue;
+    private String faceValue;
 
     @Column(name = "NMBR_STCK_LSTN")
-    String numberStockListings;
+    private String numberStockListings;
 
 }

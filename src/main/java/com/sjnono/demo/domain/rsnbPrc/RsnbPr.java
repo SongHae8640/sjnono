@@ -15,29 +15,29 @@ import javax.persistence.*;
 public class RsnbPr {
 
     @Id @GeneratedValue
-    Long id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FNNC_STTM_ID")
-    FnncSttm fnncSttm;
+    private FnncSttm fnncSttm;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "STCK_STND_CODE")
-    Stock stock;
+    private Stock stock;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "RSNB_PRC_CLCL_MTHD_ID")
-    RsnbPrcClclMthd rsnbPrcClclMthd;
+    private RsnbPrcClclMthd rsnbPrcClclMthd;
 
     @Column(name = "DSCN_RATE")
-    String discountRate;
+    private String discountRate;
 
 
     @Column(name = "DATE")
-    String date;
+    private String date;
 
     @Column(name = "RSNB_PRC")
-    int reasonablePrice;
+    private int reasonablePrice;
 
 
 

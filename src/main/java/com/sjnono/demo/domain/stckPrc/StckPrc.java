@@ -5,6 +5,7 @@ import com.sjnono.demo.domain.stock.Stock;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "stck_prc")
@@ -13,14 +14,14 @@ import javax.persistence.*;
 public class StckPrc {
 
     @Id @GeneratedValue
-    Long id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "STND_CODE")
-    Stock stock;
+    private Stock stock;
 
     @Column(name = "PRC")
-    int price;
+    private int price;
 
-    String date;
+    private LocalDateTime date;
 }

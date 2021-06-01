@@ -1,4 +1,4 @@
-package com.sjnono.demo.domain.ex;
+package com.sjnono.demo.domain.ex.controller;
 
 
 import org.springframework.stereotype.Controller;

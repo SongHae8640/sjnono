@@ -13,17 +13,17 @@ import javax.persistence.*;
 public class FnncSttm {
 
     @Id @GeneratedValue
-    Long id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "STND_CODE")
-    Stock stock;
+    private Stock stock;
 
     @Column(name = "BASE_YEAR")
-    String baseYear;
+    private String baseYear;
 
     @Column(name = "BASE_QRTR")
-    String baseQuarter;
+    private String baseQuarter;
 
 
 }

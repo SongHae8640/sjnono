@@ -24,7 +24,7 @@ export default {
     },
 
     insertEx(standardCode){
-        var exJson = {stock : {'standardCode' : standardCode}}
+        const exJson = {'standardCode' : standardCode}
         return fetch('/api/ex',{
             method : 'POST',
             headers :{
@@ -34,7 +34,7 @@ export default {
         }).then(response =>
             response.json().then(data => ({ status : response.status, data : data}))
         ).catch(err => {
-            response.json().then(data => ({ data : data}))
+            err.json().then(data => ({ data : data}))
         })
     },
 

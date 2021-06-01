@@ -1,6 +1,12 @@
-package com.sjnono.demo.domain.ex;
+package com.sjnono.demo.domain.ex.service;
 
 
+import com.sjnono.demo.domain.ex.controller.ExRestController;
+import com.sjnono.demo.domain.ex.entity.Example;
+import com.sjnono.demo.domain.ex.repository.ExRepository;
+import com.sjnono.demo.domain.stock.Stock;
+import com.sjnono.demo.domain.stock.StockRepository;
+import com.sjnono.demo.domain.stock.StockService;
 import com.sjnono.demo.global.error.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -17,6 +23,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class ExService {
 
     private final ExRepository exRepository;
+    private final StockRepository stockRepository;
 
     public Example findById(Long exId) {
         Example byIdJoinStock = exRepository.findByIdJoinStock(exId);
@@ -33,7 +40,14 @@ public class ExService {
     }
 
     @Transactional
-    public Example insertEx(Example example) {
+    public Example insertEx(String standardCode) {
+        Stock findStock = stockRepository.findById(standardCode)
+                .orElseThrow(() -> {
+                    throw new NotFoundException(
+                            linkTo(ExRestController.class).withSelfRel());
+                });
+
+        Example example = Example.createExample(findStock);
         return exRepository.save(example);
     }
 }
