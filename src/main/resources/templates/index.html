@@ -20,14 +20,19 @@
         <div class="col-lg-6 mx-auto">
             <p class="lead mb-4">관심있는 주식의 적정가격을 검색해보세요</p>
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="검색어를 입력하세요" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Q</button>
+                <form id='stockForm' class="d-flex">
+                    <input id="shrIpt" class="form-control me-2" type="search" placeholder="검색어를 입력하세요" aria-label="Search">
+                    <button id="shrBtn" class="btn btn-outline-success" type="submit">Q</button>
                 </form>
             </div>
         </div>
     </div>
 </main>
 <th:block th:replace ="fragments/footer"></th:block>
+
+<script type="module" th:src="@{/webjars/awesomplete/1.1.4/awesomplete.js}"></script>
+<link rel="stylesheet" th:href="@{/webjars/awesomplete/1.1.4/awesomplete.css}"></link>
+<script type="module" src="stock/js/stock.js"></script>
+
 </body>
 </html>

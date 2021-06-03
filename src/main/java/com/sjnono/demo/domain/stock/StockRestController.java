@@ -6,9 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
-@RequestMapping("/stock")
+@RequestMapping("/api/stock")
 public class StockRestController {
 
     @Autowired
@@ -23,5 +24,12 @@ public class StockRestController {
 //        return ResponseEntity.created(URI.create("")).body(stock);
 //    }
 
+    @GetMapping("/{shrIpt}")
+    public ResponseEntity getStockList(@PathVariable String shrIpt){
+
+        List<Stock> stockList = stockService.getStockList(shrIpt);
+
+        return ResponseEntity.created(URI.create("")).body(stockList);
+    }
 
 }
