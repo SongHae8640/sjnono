@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class StckPrc {
 
     @Id
-    Integer id;
+    Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "STND_CODE")
