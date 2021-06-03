@@ -20,7 +20,8 @@ public class ExValidator {
 
     public void getListValidate(Pageable pageable) {
         if(pageable.getPageNumber() <1){
-
+            throw new BadRequestException(
+                    linkTo(methodOn(ExRestController.class).getExampleAll(pageable, null)).withSelfRel());
         }
     }
 

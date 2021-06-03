@@ -1,20 +1,27 @@
 package com.sjnono.demo.domain.ex.controller;
 
+import com.sjnono.demo.domain.ex.entity.Example;
 import com.sjnono.demo.domain.ex.service.ExService;
 import com.sjnono.demo.domain.ex.validation.ExValidator;
-import com.sjnono.demo.domain.ex.entity.Example;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/api/ex")
@@ -44,19 +51,35 @@ public class ExRestController {
         private String koreanStockName;
     }
 
-    // TODO getExampleList 리팩터링 필요
     @GetMapping
-    public ResponseEntity getExampleList(@PageableDefault(sort = "id", direction = Sort.Direction.ASC, size = 3)
-                                                 Pageable pageable) {
-        this.exValidator.getListValidate(pageable);
+    public ResponseEntity getExampleAll(@PageableDefault(sort = "id", direction = Sort.Direction.ASC, size = 3)
+                                                Pageable pageable, PagedResourcesAssembler<ExampleAllResponse> assembler) {
+        exValidator.getListValidate(pageable);
 
-        Page<Example> search = this.exService.search(pageable);
+        Page<Example> search = exService.search(pageable);
 
-        EntityModel<Page<Example>> model = EntityModel.of(search)
-                .add(linkTo(this.getClass()).withSelfRel());
+        // convert to ExampleAllResponse
+        List<ExampleAllResponse> toDto = search.getContent()
+                .stream()
+                .map(example -> new ExampleAllResponse(example.getId(), example.getStock().getStandardCode(), example.getStock().getKoreanStockName()))
+                .collect(toList());
 
-        return ResponseEntity.ok(model);
+        // create HATEOAS
+        PagedModel<EntityModel<ExampleAllResponse>> entityModels =
+                assembler.toModel(new PageImpl<>(toDto, search.getPageable(), search.getTotalElements()),
+                        entity -> EntityModel.of(entity)
+                                .add(linkTo(ExRestController.class).slash(entity.getId()).withSelfRel()));
+        return ResponseEntity.ok(entityModels);
     }
+
+    @Data
+    @AllArgsConstructor
+    static class ExampleAllResponse {
+        private Long id;
+        private String standardCode;
+        private String koreanStockName;
+    }
+
 
     @PostMapping
     public ResponseEntity saveExample(@RequestBody SaveExampleRequest request) {
@@ -65,8 +88,7 @@ public class ExRestController {
         Example savedExample = exService.insertEx(request.getStandardCode());
 
         // Entity to Dto
-        SaveExampleResponse response = new SaveExampleResponse(
-                savedExample.getStock().getStandardCode(),
+        SaveExampleResponse response = new SaveExampleResponse(savedExample.getStock().getStandardCode(),
                 savedExample.getStock().getKoreanStockName());
         // create HATEOAS
         EntityModel<SaveExampleResponse> model = EntityModel.of(response)
@@ -79,7 +101,8 @@ public class ExRestController {
         private String standardCode;
     }
 
-    @Data @AllArgsConstructor
+    @Data
+    @AllArgsConstructor
     static class SaveExampleResponse {
         private String standardCode;
         private String koreanStockName;

@@ -74,12 +74,39 @@ class ExRestControllerTest {
         ;
     }
 
-    // TODO getExampleList 리팩토링 필요
     @Test
-    void getExampleList() throws Exception {
-        ResultActions actions = mockMvc.perform(get("/api/ex?page=0"));
+    public void 예제_페이지네이션() throws Exception {
+        // GIVEN
+        String urlTemplate = "/api/ex";
 
+        // WHEN
+        ResultActions actions = mockMvc.perform(get(urlTemplate));
+
+        // THEN
         actions.andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("page").exists())
+                .andExpect(jsonPath("_embedded.exampleAllResponseList[0]._links.self").exists())
+        ;
+    }
+
+    @Test
+    public void 예제_페이지네이션_BadRequest() throws Exception {
+        // GIVEN
+        String urlTemplate = "/api/ex";
+
+        // WHEN
+        ResultActions actions = mockMvc.perform(get(urlTemplate)
+                .param("page", "-1")
+                .param("size", "3")
+                .param("sort", "id,ASC"));
+
+        // THEN
+        actions.andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("httpStatus").exists())
+                .andExpect(jsonPath("message").exists())
+                .andExpect(jsonPath("_links.self").exists())
         ;
     }
 
@@ -95,19 +122,17 @@ class ExRestControllerTest {
 
         // When
         ResultActions actions = mockMvc.perform(post("/api/ex")
-                                    .contentType(MediaType.APPLICATION_JSON)
-                                    .content(objectMapper.writeValueAsString(param)));
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(param)));
 
         // Then
         actions.andDo(print())
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("standardCode").exists())
-            .andExpect(jsonPath("koreanStockName").exists())
-            .andExpect(jsonPath("_links.self").exists())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("standardCode").exists())
+                .andExpect(jsonPath("koreanStockName").exists())
+                .andExpect(jsonPath("_links.self").exists())
         ;
     }
-
-
 
 
 }
