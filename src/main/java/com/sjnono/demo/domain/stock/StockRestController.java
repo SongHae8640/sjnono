@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/stock")
+@RequestMapping("/api/stock")
 public class StockRestController {
 
     @Autowired
