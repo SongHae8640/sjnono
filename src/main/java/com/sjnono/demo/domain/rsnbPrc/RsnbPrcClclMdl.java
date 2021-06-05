@@ -2,6 +2,7 @@ package com.sjnono.demo.domain.rsnbPrc;
 
 import com.sjnono.demo.domain.fnncSttm.FnncSttm;
 import com.sjnono.demo.domain.rsnbPrc.RsnbPr;
+import com.sun.xml.bind.v2.TODO;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class RsnbPrcClclMdl {
     public List<RsnbPr> calRsnbPrcAll(FnncSttm fnncSttm){
         List<RsnbPr> rsnbPrList = new ArrayList<>();
 
+        //TODO 해당 적정가격계산방법으로 계산한 결과가 있으면 pass
         rsnbPrList.add(this.warrenBuffettCal(fnncSttm));
 
 

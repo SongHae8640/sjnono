@@ -14,18 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class DsclInfrResponseDto {
+public class DisInfoResponseDto {
 
     @JacksonXmlProperty(localName = "querytime")
     String inquiryTime;
 
 
     @JacksonXmlElementWrapper(useWrapping = false)
-    List<DsclInfr> disInfo = new ArrayList<>();
+    List<DisInfo> disInfo = new ArrayList<>();
 
 
     @Data
-    private static class DsclInfr {
+    public static class DisInfo {
         @JacksonXmlProperty(localName = "distime")
         String disclosureDate;
 
@@ -37,6 +37,17 @@ public class DsclInfrResponseDto {
 
         @JacksonXmlProperty(localName = "submitOblgNm")
         String submitOblgNm;
+
+        public DsclInfr convertDisInfoToDsclInfr(){
+
+            return DsclInfr.builder()
+                    .disclosureDate(this.disclosureDate)
+                    .disclosureAcceptNumber(this.disclosureAcceptNumber)
+                    .title(this.title)
+                    .build();
+
+        }
+
     }
 
 }

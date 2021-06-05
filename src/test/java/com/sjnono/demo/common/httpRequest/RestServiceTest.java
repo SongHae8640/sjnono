@@ -2,7 +2,7 @@ package com.sjnono.demo.common.httpRequest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.sjnono.demo.domain.stock.dsclInfr.DsclInfrResponseDto;
+import com.sjnono.demo.domain.stock.dsclInfr.DisInfoResponseDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,7 +23,7 @@ class RestServiceTest {
         httpResponseXml = httpResponseXml.trim();
 
         XmlMapper xmlMapper = new XmlMapper();
-        DsclInfrResponseDto disclosureMain = xmlMapper.readValue(httpResponseXml, DsclInfrResponseDto.class);
+        DisInfoResponseDto disclosureMain = xmlMapper.readValue(httpResponseXml, DisInfoResponseDto.class);
 
         System.out.println(disclosureMain.toString());
 

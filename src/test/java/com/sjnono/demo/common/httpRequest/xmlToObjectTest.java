@@ -3,7 +3,7 @@ package com.sjnono.demo.common.httpRequest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.sjnono.demo.domain.stock.dsclInfr.DsclInfrResponseDto;
+import com.sjnono.demo.domain.stock.dsclInfr.DisInfoResponseDto;
 import org.junit.jupiter.api.Test;
 
 
@@ -31,7 +31,7 @@ public class xmlToObjectTest {
 
         httpResponseXml = httpResponseXml.trim();
 
-        DsclInfrResponseDto disclosureMain = xmlMapper.readValue(httpResponseXml, DsclInfrResponseDto.class);
+        DisInfoResponseDto disclosureMain = xmlMapper.readValue(httpResponseXml, DisInfoResponseDto.class);
 
         System.out.println(disclosureMain.toString());
 
