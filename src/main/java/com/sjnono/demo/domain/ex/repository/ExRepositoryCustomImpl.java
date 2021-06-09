@@ -1,10 +1,9 @@
-package com.sjnono.demo.domain.ex;
+package com.sjnono.demo.domain.ex.repository;
 
 
 import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.sjnono.demo.domain.ex.QExample;
-import com.sjnono.demo.domain.stock.QStock;
+import com.sjnono.demo.domain.ex.entity.Example;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

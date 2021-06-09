@@ -3,22 +3,18 @@ package com.sjnono.demo.domain.rsnbPrcClclMthd;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "rsnb_prc_clcl_mthd")
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class RsnbPrcClclMthd {
 
-    @Id
-    Integer id;
+    @Id @GeneratedValue
+    private Long id;
 
     @Column(name = "MTHD_NAME")
-    String methodName;
+    private String methodName;
 
 }

@@ -1,0 +1,35 @@
+server:
+  port: 9090
+
+logging:
+  level:
+    org.hibernate.type: trace
+    org.hibernate.SQL: debug
+
+
+spring:
+  datasource:
+    initialization-mode: always
+    data: classpath:data/stock.sql
+    sql-script-encoding: UTF-8 # DB init Data
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: admin
+
+  devtools:
+    livereload:
+      enabled: true
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 1000 # OneToMany In Query Size
+    open-in-view: false # OSIV
+
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true

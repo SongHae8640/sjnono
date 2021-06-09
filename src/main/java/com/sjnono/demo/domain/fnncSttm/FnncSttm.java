@@ -7,26 +7,23 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "fnnc_sttm")
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class FnncSttm {
 
-    @Id
-    Integer id;
-
+    @Id @GeneratedValue
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "STND_CODE")
-    Stock stock;
+    private Stock stock;
 
     @Column(name = "BASE_YEAR")
-    String baseYear;
+    private String baseYear;
 
     @Column(name = "BASE_QRTR")
-    String baseQuarter;
+    private String baseQuarter;
 
 
 }
