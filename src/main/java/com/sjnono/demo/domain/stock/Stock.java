@@ -47,4 +47,11 @@ public class Stock {
     @Column(name = "NMBR_STCK_LSTN")
     private String numberStockListings;
 
+    @Column(name = "STOCK_CATEGORY")
+    private String stockCategory;
+
+    //== 연관관계 편의 메소드 ==//
+    public void setStockCategory(String category) {
+        this.stockCategory = category;
+    }
 }

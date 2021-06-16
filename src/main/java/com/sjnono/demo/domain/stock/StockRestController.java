@@ -2,16 +2,13 @@ package com.sjnono.demo.domain.stock;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/stock")
+@RequestMapping("/api/stock")
 @RequiredArgsConstructor
 public class StockRestController {
 
@@ -32,6 +29,15 @@ public class StockRestController {
         List<Stock> stockList = stockService.getStockList(shrIpt);
 
         return ResponseEntity.created(URI.create("")).body(stockList);
+    }
+
+    @PutMapping("/category")
+    public ResponseEntity modifyStockCategory() {
+        List<Stock> stocks = stockService.findAllStock();
+
+        stockService.updateStockCategories(stocks);
+
+        return null;
     }
 
 }
