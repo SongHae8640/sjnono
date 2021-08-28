@@ -24,6 +24,14 @@ public class StockService {
         return stock;
     }
 
+    public Stock getStock(String shrIpt) {
+
+        Stock stock = stockRepository.findByKoreanStockName(shrIpt);
+
+
+        return stock;
+    }
+
     public Stock saveStock(Stock stock){
         //
 

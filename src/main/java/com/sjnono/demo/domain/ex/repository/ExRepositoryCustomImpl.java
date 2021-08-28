@@ -10,7 +10,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 
-import static com.sjnono.demo.domain.ex.QExample.*;
+import static com.sjnono.demo.domain.ex.entity.QExample.*;
 import static com.sjnono.demo.domain.stock.QStock.*;
 
 @RequiredArgsConstructor

@@ -16,7 +16,10 @@ public class StckPrc {
     @Id @GeneratedValue
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "PRC_DATE")
+    private String priceDate;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "STND_CODE")
     private Stock stock;
 

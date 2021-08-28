@@ -1,9 +1,9 @@
-const tag = '[StockModel]'
-
+const tag = '[StckPrcModel]'
 export default {
-    getStockListByShrIpt(shrIpt){
-        console.log(tag, 'search(shrIpt)', shrIpt)
-        return fetch('/api/stock/'+shrIpt,{
+
+    getStockPrcList(standardCode){
+        console.log(tag, 'search(shrIpt)', standardCode)
+        return fetch('/api/stckPrc/'+standardCode,{
             method : 'GET',
         }).then(response =>
             response.json().then(data => ({ status : response.status, data : data}))
@@ -11,7 +11,6 @@ export default {
             response.json().then(data => ({ data : data}))
         })
     }
-
 
 
 }

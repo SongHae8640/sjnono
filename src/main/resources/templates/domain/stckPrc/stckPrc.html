@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>주식차트</title>
+
+
+    <th:block th:replace="fragments/bootstrap5"></th:block>
+    <th:block th:replace="fragments/awesomplete"></th:block>
+    <th:block th:replace="fragments/head"></th:block>
+
+
+</head>
+<body>
+<th:block th:replace="fragments/header"></th:block>
+
+<main>
+    <div id='content' class="px-4 py-5 my-5 text-center">
+        <h1 class="display-5 fw-bold">손절노노</h1>
+        <div class="col-lg-6 mx-auto">
+            <div style="height: 888px; width: 888px;" id="myChart"></div>
+        </div>
+    </div>
+</main>
+<th:block th:replace ="fragments/footer"></th:block>
+
+<script th:inline="javascript" type="module" src="/stckPrc/js/stckPrc.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script th:inline="javascript" type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(window.onload);
+
+    window.onload = function (){
+        // 우선 컨텍스트를 가져옵니다.
+        var stckPrcList = [[${stckPrcList}]];
+        
+        drawChart(stckPrcList,'myChart')
+    }
+
+    function drawChart(stckPrcList , CompId){
+
+        var stockArr = [];
+        stockArr.push(['DATE' , 'KRW']);
+        stckPrcList.body.forEach(function (item, index , array) {
+            stockArr.push([ toDate(item.priceDate) , parseInt(item.price)])
+        })
+        var data =google.visualization.arrayToDataTable(stockArr);
+
+        var options = {
+            title:stckPrcList.body[0].koreanStockName
+            ,curveType: 'none' // function으로 하면 곡선으로됨
+            ,legend: {position : 'bottom'}
+            ,scales:{
+                yAxes : [{
+                    ticks: {
+                        stepSize : 500
+                    }
+                }]
+            }
+        }
+
+        var chart = new google.visualization.LineChart(document.getElementById(CompId));
+        chart.draw(data,options);
+    }
+
+    function toDate(date){
+        if(date.length !=8) return date;
+        return date.substring(0,4) +'-'+ date.substring(4,6) +'-'+date.substring(6);
+
+    }
+</script>
+
+</body>
+</html>

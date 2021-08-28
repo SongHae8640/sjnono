@@ -1,6 +1,6 @@
 import View from '../../../common/js/View.js'
 
-const tag = '[StockView]'
+const tag = '[StckPrcView]'
 
 const StockView = Object.create(View)
 
@@ -26,7 +26,7 @@ StockView.bindEvent = function (){
 
     this.shrBtn.addEventListener('click', e => this.onClickShrBtn(e))
     this.shrIpt.addEventListener('keyup', e => this.onKeyupShrIpt(e))
-
+    this.shrIpt.addEventListener('awesomplete-select',e => this.onSelectStock(e));
     return this
 
 
@@ -56,9 +56,15 @@ StockView.onKeyupShrIpt = function (e){
 StockView.render = function (jsonData= {}){
     console.log(tag, 'render(jsonData)', jsonData)
     var stockArr = [];
-    jsonData.forEach(function (item , idx , arr){stockArr.push(item.koreanStockName)})
+    jsonData.forEach(function (item , idx , arr){stockArr.push({label: item.koreanStockName , value: item.standardCode })})
     this.awesomplete.list = stockArr;
     this.awesomplete.evaluate();
+
+
 }
 
+StockView.onSelectStock = function (e) {
+    console.log(tag, 'onSelectStock(e)', e , e.text)
+    location.href = '/stckPrc/'+e.text.value;
+}
 export default StockView

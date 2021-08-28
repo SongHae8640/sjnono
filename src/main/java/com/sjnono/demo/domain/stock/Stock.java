@@ -38,8 +38,8 @@ public class Stock {
     private String department;
 
     @Column(name = "STCK_TYPE")
-    @Enumerated(EnumType.STRING)
-    private StockType stockType;
+    //@Enumerated(EnumType.STRING)
+    private String stockType;
 
     @Column(name = "FACE_VL")
     private String faceValue;

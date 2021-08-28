@@ -1,6 +1,12 @@
 package com.sjnono.demo.domain.stock;
 
+import com.sjnono.demo.domain.ex.controller.ExRestController;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,9 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
-@RequestMapping("/stock")
+@RequestMapping("/api/stock")
 @RequiredArgsConstructor
 public class StockRestController {
 
@@ -31,7 +41,17 @@ public class StockRestController {
 
         List<Stock> stockList = stockService.getStockList(shrIpt);
 
+        List<StockDto> stockDtoList = stockList.stream().map(stock -> new StockDto(stock.getStandardCode(),stock.getKoreanStockName()))
+                .collect(Collectors.toList());
+
         return ResponseEntity.created(URI.create("")).body(stockList);
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class StockDto {
+        private String standardCode;
+        private String koreanStockName;
     }
 
 }
