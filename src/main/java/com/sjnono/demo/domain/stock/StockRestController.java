@@ -8,10 +8,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
@@ -47,11 +44,21 @@ public class StockRestController {
         return ResponseEntity.created(URI.create("")).body(stockList);
     }
 
+<<<<<<< HEAD
     @Data
     @AllArgsConstructor
     static class StockDto {
         private String standardCode;
         private String koreanStockName;
+=======
+    @PutMapping("/category")
+    public ResponseEntity modifyStockCategory() {
+        List<Stock> stocks = stockService.findAllStock();
+
+        stockService.updateStockCategories(stocks);
+
+        return null;
+>>>>>>> origin
     }
 
 }
