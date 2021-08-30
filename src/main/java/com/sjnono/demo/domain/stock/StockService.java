@@ -47,7 +47,7 @@ public class StockService {
         return stockRepository.findAll();
     }
 
-<<<<<<< HEAD
+
     public Stock getStock(String shrIpt) {
 
         Stock stock = stockRepository.findByKoreanStockName(shrIpt);
@@ -56,12 +56,10 @@ public class StockService {
         return stock;
     }
 
-    public Stock saveStock(Stock stock){
         //
-=======
     @Transactional
     public void updateStockCategories(List<Stock> stocks) {
->>>>>>> origin
+
 
         stocks.stream().forEach(stock -> {
             // Make Body

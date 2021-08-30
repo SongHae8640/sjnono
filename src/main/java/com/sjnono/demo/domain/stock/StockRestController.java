@@ -44,13 +44,7 @@ public class StockRestController {
         return ResponseEntity.created(URI.create("")).body(stockList);
     }
 
-<<<<<<< HEAD
-    @Data
-    @AllArgsConstructor
-    static class StockDto {
-        private String standardCode;
-        private String koreanStockName;
-=======
+
     @PutMapping("/category")
     public ResponseEntity modifyStockCategory() {
         List<Stock> stocks = stockService.findAllStock();
@@ -58,7 +52,14 @@ public class StockRestController {
         stockService.updateStockCategories(stocks);
 
         return null;
->>>>>>> origin
+    }
+
+
+    @Data
+    @AllArgsConstructor
+    static class StockDto {
+        private String standardCode;
+        private String koreanStockName;
     }
 
 }
